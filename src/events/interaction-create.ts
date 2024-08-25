@@ -1,9 +1,10 @@
 import { Interaction } from "discord.js";
+import terminal from "../utils/terminal";
 
 export const onInteractionCreate = async (interaction: Interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
-  console.log(`Make a /${interaction.commandName} command`);
+  terminal.info(`Make a /${interaction.commandName} command`);
 
   const command = (interaction.client as any).commands.get(
     interaction.commandName

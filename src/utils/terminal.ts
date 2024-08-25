@@ -45,10 +45,12 @@ function debug(message: string) {
   console.log(`${color.blue}[${getTimestamp()}]${color.reset} ${message}`);
 }
 
-export default {
+const terminal = {
   info,
   warn,
   error,
   success,
   debug,
 };
+
+export default terminal;
