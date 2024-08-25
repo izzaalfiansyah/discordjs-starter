@@ -1,5 +1,6 @@
 import { Client } from "discord.js";
+import terminal from "../utils/terminal";
 
 export const onReady = (client: Client<true>) => {
-  console.log(`Ready! Logged in as ${client.user.tag}`);
+  terminal.info(`Ready! Logged in as ${client.user.tag}`);
 };
