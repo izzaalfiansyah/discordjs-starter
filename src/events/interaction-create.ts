@@ -1,7 +1,10 @@
-import { Interaction } from "discord.js";
+import { Client, Interaction } from "discord.js";
 import terminal from "../utils/terminal";
 
-export const onInteractionCreate = async (interaction: Interaction) => {
+export const onInteractionCreate = async (
+  interaction: Interaction,
+  client: Client<true>
+) => {
   if (!interaction.isChatInputCommand()) return;
 
   terminal.info(`Make a /${interaction.commandName} command`);
@@ -16,7 +19,7 @@ export const onInteractionCreate = async (interaction: Interaction) => {
   }
 
   try {
-    await command.execute(interaction);
+    await command.execute(interaction, client);
   } catch (error) {
     console.error(error);
     if (interaction.replied || interaction.deferred) {

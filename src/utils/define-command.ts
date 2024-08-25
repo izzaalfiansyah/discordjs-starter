@@ -1,6 +1,9 @@
-import { Client, CommandInteraction } from "discord.js";
+import { Client, CommandInteraction, Interaction } from "discord.js";
 
 export const defineCommand = (commands: {
   data: any;
-  execute: (interaction: CommandInteraction, client: Client<boolean>) => void;
+  execute: (
+    interaction: CommandInteraction & Interaction,
+    client: Client<true>
+  ) => void;
 }) => commands;

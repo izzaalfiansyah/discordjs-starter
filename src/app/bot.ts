@@ -16,7 +16,9 @@ const client = new Client({
 
 client.once(Events.ClientReady, onReady);
 
-client.on(Events.InteractionCreate, onInteractionCreate);
+client.on(Events.InteractionCreate, (interaction) =>
+  onInteractionCreate(interaction, client as Client<true>)
+);
 
 handleCommands(client);
 
