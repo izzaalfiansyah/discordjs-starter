@@ -25,23 +25,23 @@ function getTimestamp() {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
-function info(message) {
+function info(message: string) {
   console.log(`${color.yellow}[${getTimestamp()}]${color.reset} ${message}`);
 }
 
-function warn(message) {
+function warn(message: string) {
   console.log(`${color.orange}[${getTimestamp()}]${color.reset} ${message}`);
 }
 
-function error(message) {
+function error(message: string) {
   console.log(`${color.red}[${getTimestamp()}]${color.reset} ${message}`);
 }
 
-function success(message) {
+function success(message: string) {
   console.log(`${color.green}[${getTimestamp()}]${color.reset} ${message}`);
 }
 
-function debug(message) {
+function debug(message: string) {
   console.log(`${color.blue}[${getTimestamp()}]${color.reset} ${message}`);
 }
 
