@@ -1,6 +1,6 @@
-import { Client, CommandInteraction, Interaction } from "discord.js";
+import { CommandInteraction } from "discord.js";
 
-export const defineCommand = (commands: {
+export const defineCommand = <T = CommandInteraction>(commands: {
   data: any;
-  execute: (interaction: CommandInteraction & Interaction) => void;
+  execute: (interaction: T) => void;
 }) => commands;

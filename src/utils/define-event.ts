@@ -1,4 +1,4 @@
-import { Client, Interaction } from "discord.js";
+import { Interaction } from "discord.js";
 
 export const defineEvent = <T = Interaction>(events: {
   name: string;
