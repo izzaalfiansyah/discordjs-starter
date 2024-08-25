@@ -1,12 +1,13 @@
 import { Colors, EmbedBuilder, SlashCommandBuilder } from "discord.js";
-import { defineCommand } from "../../utils/define-command";
+import { defineCommand } from "../utils/define-command";
 
 export default defineCommand({
   data: new SlashCommandBuilder()
     .setName("ping")
     .setDescription("🏓 Send a ping request"),
-  execute: async (interaction, client) => {
+  execute: async (interaction) => {
     const startTimestamp = Date.now();
+    const client = interaction.client;
     const ws = client.ws.ping;
 
     const msgEdit = Date.now() - startTimestamp;

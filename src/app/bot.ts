@@ -1,10 +1,9 @@
 import { Client, Collection, Events, GatewayIntentBits } from "discord.js";
-import { onReady } from "../events/ready";
 import { handleCommands } from "../utils/handle-command";
-import { onInteractionCreate } from "../events/interaction-create";
 import "../utils/register-command";
+import { handleEvents } from "../utils/handle-event";
 
-const client = new Client({
+export const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
@@ -14,12 +13,7 @@ const client = new Client({
 
 (client as any).commands = new Collection();
 
-client.once(Events.ClientReady, onReady);
-
-client.on(Events.InteractionCreate, (interaction) =>
-  onInteractionCreate(interaction, client as Client<true>)
-);
-
 handleCommands(client);
+handleEvents(client);
 
 client.login(process.env.BOT_TOKEN);
