@@ -1,6 +1,7 @@
 import { REST, Routes } from "discord.js";
 import fs from "fs";
 import path from "path";
+import terminal from "./terminal";
 
 const commands: any[] = [];
 // Grab all the command folders from the commands directory you created earlier
@@ -33,7 +34,7 @@ const rest = new REST().setToken(process.env.BOT_TOKEN as string);
 // and deploy your commands!
 (async () => {
   try {
-    console.log(
+    terminal.success(
       `Started refreshing ${commands.length} application (/) commands.`
     );
 
@@ -46,7 +47,7 @@ const rest = new REST().setToken(process.env.BOT_TOKEN as string);
       { body: commands }
     );
 
-    console.log(
+    terminal.success(
       `Successfully reloaded ${data.length} application (/) commands.`
     );
   } catch (error) {
