@@ -1,10 +1,10 @@
 import { Colors, EmbedBuilder, SlashCommandBuilder } from "discord.js";
-import { defineCommand } from "../utils/define-command";
+import { defineCommand } from "../../utils/define-command";
 
 export default defineCommand({
   data: new SlashCommandBuilder()
-    .setName("ping")
-    .setDescription("🏓 Send a ping request"),
+    .setName("pong")
+    .setDescription("🏓 Send a pong request"),
   execute: async (interaction) => {
     const startTimestamp = Date.now();
     const client = interaction.client;
@@ -19,7 +19,7 @@ export default defineCommand({
 
     const embed = new EmbedBuilder()
       .setColor(Colors.Default)
-      .setTitle("🏓 PING / LATENCY 🏓")
+      .setTitle("🏓 PONG / LATENCY 🏓")
       .setThumbnail(client.user.displayAvatarURL())
       .addFields(
         { name: "Websocket", value: `\`${ws}ms\``, inline: true },

@@ -3,23 +3,46 @@ import fs from "fs";
 import path from "path";
 import terminal from "./terminal";
 
+const pushCommand = (props: { files: string[]; path: string }) => {
+  for (const file of props.files) {
+    const filePath = path.join(props.path, file);
+    const command = require(filePath).default;
+
+    try {
+      commands.push(command.data.toJSON());
+    } catch (e: any) {
+      terminal.error(e);
+    }
+  }
+};
+
 const commands: any[] = [];
 
 const commandPath = path.join(__dirname, "../commands");
+const commandFolders = fs
+  .readdirSync(commandPath)
+  .filter((file) => !file.endsWith(".ts"));
+
+for (const folder of commandFolders) {
+  const folderPath = path.join(commandPath, folder);
+  const commandFiles = fs
+    .readdirSync(folderPath)
+    .filter((file) => file.endsWith(".ts"));
+
+  pushCommand({
+    path: folderPath,
+    files: commandFiles,
+  });
+}
+
 const commandFiles = fs
   .readdirSync(commandPath)
   .filter((file) => file.endsWith(".ts"));
 
-for (const file of commandFiles) {
-  const filePath = path.join(commandPath, file);
-  const command = require(filePath).default;
-
-  try {
-    commands.push(command.data.toJSON());
-  } catch (e: any) {
-    terminal.error(e);
-  }
-}
+pushCommand({
+  files: commandFiles,
+  path: commandPath,
+});
 
 // Construct and prepare an instance of the REST module
 const rest = new REST().setToken(process.env.BOT_TOKEN as string);
