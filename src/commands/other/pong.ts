@@ -5,6 +5,7 @@ export default defineCommand({
   data: new SlashCommandBuilder()
     .setName("pong")
     .setDescription("🏓 Send a pong request"),
+  developer: true,
   execute: async (interaction) => {
     const startTimestamp = Date.now();
     const client = interaction.client;

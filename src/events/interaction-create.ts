@@ -1,4 +1,4 @@
-import { Client, Events, Interaction } from "discord.js";
+import { Client, EmbedBuilder, Events, Interaction } from "discord.js";
 import terminal from "../utils/terminal";
 import { defineEvent } from "../utils/define-event";
 
@@ -18,6 +18,19 @@ export default defineEvent({
         `No command matching ${interaction.commandName} was found.`
       );
       return;
+    }
+
+    if (command.developer) {
+      const userId = interaction.user.id;
+      const isDeveloper = userId == process.env.developerID;
+
+      if (!isDeveloper) {
+        const embed = new EmbedBuilder()
+          .setColor("Red")
+          .setDescription("Perintah ini hanya dapat digunakan oleh developer");
+
+        return interaction.reply({ embeds: [embed], ephemeral: true });
+      }
     }
 
     try {
